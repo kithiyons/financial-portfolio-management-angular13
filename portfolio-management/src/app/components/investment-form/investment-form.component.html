@@ -1,0 +1,67 @@
+<div class="investment-form-container" fxLayout="column" fxLayoutGap="20px" fxLayoutAlign="center stretch" style="padding: 20px; max-width: 700px; margin: auto;">
+
+  <!-- FORM MODE -->
+  <form *ngIf="!reviewMode" [formGroup]="investmentForm" (ngSubmit)="reviewDetails()" fxLayout="column" fxLayoutGap="15px">
+
+    <div fxLayout="row wrap" fxLayoutGap="20px">
+      <div fxFlex.xs="100%" fxFlex.sm="48%" fxFlex.md="48%" fxFlex.lg="48%">
+        <label>Asset Type:</label>
+        <input type="text" formControlName="assetType" class="input-field" appHighlight/>
+        <div class="error" *ngIf="investmentForm.get('assetType')?.touched && investmentForm.get('assetType')?.invalid">
+          Asset Type is required.
+        </div>
+      </div>
+
+      <div fxFlex.xs="100%" fxFlex.sm="48%" fxFlex.md="48%" fxFlex.lg="48%">
+        <label>Quantity:</label>
+        <input type="number" formControlName="quantity" class="input-field" />
+        <div class="error" *ngIf="investmentForm.get('quantity')?.touched && investmentForm.get('quantity')?.invalid">
+          Quantity must be at least 1.
+        </div>
+      </div>
+    </div>
+
+    <div fxLayout="row wrap" fxLayoutGap="20px">
+      <div fxFlex.xs="100%" fxFlex.sm="48%" fxFlex.md="48%" fxFlex.lg="48%">
+        <label>Purchase Price:</label>
+        <input type="number" formControlName="purchasePrice" class="input-field" />
+        <div class="error" *ngIf="investmentForm.get('purchasePrice')?.touched && investmentForm.get('purchasePrice')?.invalid">
+          Price must be greater than 0.
+        </div>
+      </div>
+
+      <div fxFlex.xs="100%" fxFlex.sm="48%" fxFlex.md="48%" fxFlex.lg="48%">
+        <label>Purchase Date:</label>
+        <input type="date" formControlName="purchaseDate" class="input-field" />
+        <div class="error" *ngIf="investmentForm.get('purchaseDate')?.touched && investmentForm.get('purchaseDate')?.invalid">
+          Purchase Date is required.
+        </div>
+      </div>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="end">
+      <button type="submit" class="submit-btn">Review</button>
+    </div>
+  </form>
+
+  <!-- REVIEW MODE -->
+  <div *ngIf="reviewMode" class="review-section" fxLayout="column" fxLayoutGap="15px">
+    <h3>Review Your Investment Details</h3>
+
+    <div fxLayout="row wrap" fxLayoutGap="20px">
+      <p fxFlex.xs="100%" fxFlex.sm="48%" fxFlex.md="48%" fxFlex.lg="48%"><strong>Asset Type:</strong> {{ investmentForm.value.assetType }}</p>
+      <p fxFlex.xs="100%" fxFlex.sm="48%" fxFlex.md="48%" fxFlex.lg="48%"><strong>Quantity:</strong> {{ investmentForm.value.quantity }}</p>
+    </div>
+
+    <div fxLayout="row wrap" fxLayoutGap="20px">
+      <p fxFlex.xs="100%" fxFlex.sm="48%" fxFlex.md="48%" fxFlex.lg="48%"><strong>Purchase Price:</strong> {{ investmentForm.value.purchasePrice | currency }}</p>
+      <p fxFlex.xs="100%" fxFlex.sm="48%" fxFlex.md="48%" fxFlex.lg="48%"><strong>Purchase Date:</strong> {{ investmentForm.value.purchaseDate | date }}</p>
+    </div>
+
+    <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="end">
+      <button (click)="editForm()" class="edit-btn">Edit</button>
+      <button (click)="submitForm()" class="submit-btn">Confirm & Submit</button>
+    </div>
+  </div>
+
+</div>
