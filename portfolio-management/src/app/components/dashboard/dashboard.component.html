@@ -1,0 +1,31 @@
+<h2>Investment Dashboard</h2>
+<div *ngIf="investments.length > 0; else noData">
+  <canvas baseChart
+    [data]="chartData"
+    [options]="chartOptions"
+    [type]="'bar'">
+  </canvas>
+</div>
+
+<!-- ✅ Shown when no investments -->
+<ng-template #noData>
+  <p>No investment data available to display in chart.</p>
+</ng-template>
+<table border="1" cellpadding="8">
+  <thead>
+    <tr>
+      <th>Asset Type</th>
+      <th>Quantity</th>
+      <th>Purchase Price</th>
+      <th>Purchase Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let investment of investments" appHighlight>
+      <td>{{ investment.assetType }}</td>
+      <td>{{ investment.quantity }}</td>
+      <td>{{ investment.purchasePrice | currencyFormat  }}</td>
+      <td>{{ investment.purchaseDate | date }}</td>
+    </tr>
+  </tbody>
+</table>
