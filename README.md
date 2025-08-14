@@ -1,5 +1,6 @@
 npm install -g @angular/cli@15  // If you have angular 15 and more version it will work
 ng serve
+Mostly the above commands is enough to run my app.
 if you are facing issue in dependency injection kindly run these commands:
 Dependencies : 
 npm install typescript@4.9.5 --save-dev  - typescript version mismatched
